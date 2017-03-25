@@ -1,0 +1,44 @@
+
+<div class="location-search">
+	<div class="coloum-div">
+		<input type="text" id="autocomplete"   name="" class="search-div controls" placeholder="Please choose your location"  ng-model="loc" ng-blur="selected_location(loc)">
+	</div>
+	<div class="coloum-div col-px-100">
+	<a  ng-click="GetAddress()"><span class="locate-me"  id="location">Locate Me <i class="icon"></i></span></a>
+	</div>
+</div>
+
+
+		<style>
+		.pac-item-query{
+
+			color:seagreen;
+		}
+		</style>
+
+<script>
+
+ var options = {
+  types: ['(cities)'],
+ 
+ };
+
+  var input = document.getElementById('autocomplete');
+
+  var autocomplete=new google.maps.places.Autocomplete(input);
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+                fillInAddress();
+            });
+
+function fillInAddress() {
+    /* Get the place details from the Autocomplete object. */
+    /* The Autocomplete.getPlace() call retrieves a PlaceResult object */
+
+    var place = autocomplete.getPlace();
+$.cookie('eatoeato.loc', place.address_components[0].long_name);
+	//console.log(place);
+	
+}
+
+
+</script>
